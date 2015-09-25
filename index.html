@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>EPrints User Group by eprintsug</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>EPrints User Group</h1>
+        <h2>Community contributions to the EPrints platform</h2>
+        <a href="https://github.com/eprintsug" class="button"><small>Follow me on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h2>
+<a id="aim" class="anchor" href="#aim" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aim</h2>
+
+<p>The aim of <a href="http://github.com/eprintsug/">http://github.com/eprintsug/</a> is to bring together EPrints-related development projects in a single place.</p>
+
+<h2>
+<a id="join-the-team" class="anchor" href="#join-the-team" aria-hidden="true"><span class="octicon octicon-link"></span></a>Join the team</h2>
+
+<p>Everyone with an interest in EPrints development is welcome to join the user group. You don't have to join in order to contribute, but we'd love to have you on board - please contact <a href="https://github.com/cziaarm" class="user-mention">@cziaarm</a> or <a href="https://github.com/jesusbagpuss" class="user-mention">@jesusbagpuss</a>.</p>
+
+<h2>
+<a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to contribute</h2>
+
+<p>We want to make it as simple as possible for everyone to contribute to EPrints UG git projects.</p>
+
+<p>Therefore there are only 2 "rules":</p>
+
+<h3>
+<a id="1-any-code-committed-to-the-master-branch-should-be-deployable" class="anchor" href="#1-any-code-committed-to-the-master-branch-should-be-deployable" aria-hidden="true"><span class="octicon octicon-link"></span></a>1) Any code committed to the master branch should be deployable</h3>
+
+<p>Some institutions pull changes directly from github into production, so don't commit anything to master which you don't think is deployable - in other words don't commit anything half-finished or "in progress".</p>
+
+<p>As a general rule of thumb: </p>
+
+<ul>
+<li>Minor bug fixes and changes can be committed directly to master</li>
+<li>Anything else should be merged via a pull request - see (2)</li>
+</ul>
+
+<h3>
+<a id="2-pull-requests-must-be-approved-by-someone-else-in-the-community-before-merging" class="anchor" href="#2-pull-requests-must-be-approved-by-someone-else-in-the-community-before-merging" aria-hidden="true"><span class="octicon octicon-link"></span></a>2) Pull requests must be approved by someone else in the community before merging</h3>
+
+<p>If you want to do anything other than a minor bug fix or change, create a branch or a fork (give your branch a descriptive name so other people in the community can see what you're working on). When the work is completed, or you have reached a suitable milestone, create a pull request.</p>
+
+<p>Invite others in the community to take a look at your pull request - they can make comments and suggest changes or tweaks, all within the pull request. When you get the thumbs up, merge it!</p>
+
+<h2>
+<a id="working-with-bazaar-modules" class="anchor" href="#working-with-bazaar-modules" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with Bazaar modules</h2>
+
+<p>Many EPrints UG git projects are EPrints modules - their maintainers use git to manage the module code which is then packaged and released via the EPrints Bazaar <a href="http://bazaar.eprints.org/">http://bazaar.eprints.org/</a>. However if you need the very latest code or plan to contribute, you can get the module code directly from github.</p>
+
+<h3>
+<a id="deploying-a-bazaar-module-from-github" class="anchor" href="#deploying-a-bazaar-module-from-github" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploying a Bazaar module from github</h3>
+
+<p>Assuming you already have EPrints installed in /opt/eprints3 the normal steps are:</p>
+
+<pre><code>cd /opt/eprints3
+git clone git@github.com:eprintsug/foo.git lib/epm/foo
+tools/epm link_lib foo
+tools/epm enable REPOID foo
+tools/epm link_cfg REPOID foo
+</code></pre>
+
+<p>Then whenever you need to get the latest changes just run the following:</p>
+
+<pre><code>cd /opt/eprints3/lib/epm/foo
+git pull
+cd /opt/eprints3
+tools/epm link_lib foo # in case any new files were added to 'lib'
+tools/epm enable REPOID foo # in case any new files were added elsewhere
+tools/epm link_cfg REPOID foo
+</code></pre>
+
+<p>Always consult the module's README for additional instructions.</p>
+
+<h3>
+<a id="contributing-to-a-bazaar-module" class="anchor" href="#contributing-to-a-bazaar-module" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing to a Bazaar module</h3>
+
+<p>This example assumes that you are a member of the EPrints UG on github - see Join the Team above.</p>
+
+<p>As per our house "rules" (see How to Contribute) you will most likely contribute changes via a pull request. Assuming the module has been deployed (see above) use the following steps to create a new branch for your changes. Remember to use a descriptive branch name so that others can see what you are working on.</p>
+
+<pre><code>cd /opt/eprints3/lib/epm/foo
+git checkout -b add-bootstrap-styling-to-workflow-buttons 
+</code></pre>
+
+<p>Make your changes, committing as you go. When you are ready to have your changes considered for inclusion in the release version of the module log into github and create a pull request <a href="https://help.github.com/articles/creating-a-pull-request/">https://help.github.com/articles/creating-a-pull-request/</a></p>
+        </section>
+
+        <aside id="sidebar">
+
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
